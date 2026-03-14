@@ -1,0 +1,40 @@
+.list { display: flex; flex-direction: column; gap: 8px; }
+
+.center { display: flex; flex-direction: column; gap: 8px; }
+
+.skeleton {
+  height: 88px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-elevated) 50%, var(--bg-card) 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+}
+.emptyIcon {
+  font-size: 36px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.emptyTitle { font-size: 17px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+.emptyText { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+.emptyBtn {
+  background: var(--accent-dim);
+  border: 1px solid rgba(124,106,247,0.3);
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-family: var(--font-sans);
+  font-size: 14px; font-weight: 500;
+  color: var(--accent-light);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.emptyBtn:hover { background: rgba(124,106,247,0.2); }
