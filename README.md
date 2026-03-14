@@ -511,11 +511,11 @@ Response:  { "description": "Build auth UI" }    ← plain text to frontend
 
 ## Deployment
 
-### Backend — Render
+### Backend — Deployhub(my Own Platform)
 1. New Web Service → root: `backend/` → Start: `node server.js`
 2. Add all env vars
 
-### Frontend — Vercel
+### Frontend — Deployhub(my Own Platform)
 1. Root: `frontend/` → Add: `VITE_API_URL=https://your-backend.onrender.com`
 
 ### Database — MongoDB Atlas
