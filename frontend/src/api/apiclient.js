@@ -2,13 +2,11 @@ import axios from "axios";
 
 const BASE = import.meta.env.VITE_API_URL;
 
-
 export const api = axios.create({
   baseURL: `${BASE}/api/auth`,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
-
 
 export const tasksApi = axios.create({
   baseURL: `${BASE}/api/tasks`,
@@ -16,10 +14,8 @@ export const tasksApi = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-
 export const attachInterceptors = (refreshFn, logoutFn) => {
   const ejectFns = [api, tasksApi].map((instance) => {
-    
     const reqId = instance.interceptors.request.use(
       (config) => config,
       (error) => Promise.reject(error)
@@ -42,8 +38,7 @@ export const attachInterceptors = (refreshFn, logoutFn) => {
           return Promise.reject(error);
         }
 
-        
-        if (original.url?.includes("/refresh/refreshtoken")) {
+        if (original.url?.endsWith("/refresh/refreshtoken")) {
           logoutFn();
           return Promise.reject(error);
         }
@@ -79,7 +74,6 @@ export const attachInterceptors = (refreshFn, logoutFn) => {
       instance.interceptors.response.eject(resId);
     };
   });
-
 
   return () => ejectFns.forEach((fn) => fn());
 };

@@ -40,29 +40,29 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     navigate("/login", { replace: true });
   }, [navigate]);
-
-  
-  useEffect(() => {
-    const init = async () => {
-      await refreshAccessToken();
-      setIsAuthReady(true);
-    };
-    init();
-  }, []);
-
   
   useEffect(() => {
     const eject = attachInterceptors(refreshAccessToken, logout);
-    return eject;
-  }, [refreshAccessToken, logout]);
 
   
+    const init = async () => {
+      const ok = await refreshAccessToken();
+      if (!ok) {
+        navigate("/login", { replace: true });
+      }
+      setIsAuthReady(true);
+    };
+
+    init();
+
+    return eject;
+  }, []);
+
   const registerInit = async (email, name) => {
     const res = await api.post("/register/init", { email, name });
     return res.data;
   };
 
-  
   const registerVerify = async (email, otp, password, name) => {
     const res = await api.post("/register/verify", { email, otp, password, name });
     await fetchUser();
@@ -70,7 +70,6 @@ export const AuthProvider = ({ children }) => {
     return res.data;
   };
 
-  
   const login = async (email, password) => {
     await api.post("/login", { email, password });
     await fetchUser();
